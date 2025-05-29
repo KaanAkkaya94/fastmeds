@@ -6,7 +6,7 @@
     style="background-image: url({{url_for('static', filename='img/pexels-etatics-inc-252430999-12512669.jpg')}}); background-size: cover;">
     <div class="text-white text-center py-5 px-4">
         <div>
-            <h1 class="display-2">Products choices for {{ category.name }}</h1>
+            <h1 class="display-2">Items choices for {{ category.name }}</h1>
         </div>
     </div>
 </div>
@@ -18,21 +18,21 @@
 
     <div class="text-dark text-center">
         <div>
-            <p class="h3 text-dark mb-4">Select a product from below</p>
+            <p class="h3 text-dark mb-4">Select a item from below</p>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 justify-content-center" style="margin:10px;">
-                        {% for product in products %}
+                        {% for item in items %}
                             <div class="col prod_card"><div class="card">
-                                    <a href="{{ url_for('main.product_details', product_id=product.id) }}">
-                                        <img src="{{ url_for('static', filename='img/' + product.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
+                                    <a href="{{ url_for('main.item_details', item_id=item.id) }}">
+                                        <img src="{{ url_for('static', filename='img/' + item.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
                                     </a>
                                     <div class="card-body d-grid gap-2">
-                                        <h5 class="card-title">{{ product.name }}</h5>
-                                        <h2>$ {{ product.price }}</h2>
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <h2>$ {{ item.price }}</h2>
                                     </div>
                                     <div class="card-footer">
                                         <form method="POST"
-                                              action="{{ url_for('main.adding_to_basket', product_id = product.id) }}">
+                                              action="{{ url_for('main.adding_to_basket', item_id = item.id) }}">
                                             <input
                                                     type="submit"
                                                     value="+ Add to Basket"

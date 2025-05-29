@@ -3,7 +3,7 @@
 {% import 'bootstrap5/form.html' as wtf %}
 
 {% block main %}
-      <!--Card for the datailed product-->
+      <!--Card for the datailed item-->
         <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-4">
@@ -11,10 +11,10 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                   <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{{ url_for('static', filename='img/' + product.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
+                        <img src="{{ url_for('static', filename='img/' + item.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
                     </div>
                     <div class="carousel-item">
-                        <img src="{{ url_for('static', filename='img/' + product.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
+                        <img src="{{ url_for('static', filename='img/' + item.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
                     </div>
                   </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -30,12 +30,12 @@
               <!--Item details, including manufacturer, price, desription and id-->
               <div class="col-md-8">
                 <div class="card-body">
-                  <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.description}}</p>
-                  <p class="card-text"><small class="text-muted">Price: $ {{ product.price}}</small></p>
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">{{ item.description}}</p>
+                  <p class="card-text"><small class="text-muted">Price: $ {{ item.price}}</small></p>
                   <!--Buttons to place item in basket or buy direct-->
                     <form method="POST"
-                          action="{{ url_for('main.adding_to_basket', product_id = product.id) }}">
+                          action="{{ url_for('main.adding_to_basket', item_id = item.id) }}">
                         <input
                                 type="submit"
                                 value="+ Add to Basket"

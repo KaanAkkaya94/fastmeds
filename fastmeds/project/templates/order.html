@@ -10,17 +10,17 @@
         </div>
 
         {% for item in order.items %}
-        {% set product = item.product %}
+        {% set item = item.item %}
         <div class="row mb-3">
             <div class="col-sm-12">
                 <div class="card shadow-sm">
                     <div class="card-header">
                         <div class="row">
                             <h5 class="lead col-md-8 col-sm-12">
-                                {{ product.name }}
+                                {{ item.name }}
                             </h5>
                             <p class="text-success float-end col text-end">
-                                Price: {{ "$%.2f"|format(product.price) }}
+                                Price: {{ "$%.2f"|format(item.price) }}
                             </p>
                         </div>
                     </div>
@@ -29,12 +29,12 @@
                         <div class="row">
                             <div class="col" >
                                 <img class="img-thumbnail"
-                                     src="{{ url_for('static', filename='img/' + product.name.split(' ')[0] +'.jpg') }}"
+                                     src="{{ url_for('static', filename='img/' + item.name.split(' ')[0] +'.jpg') }}"
                                      style="max-height: 200px; min-height: 100px;"
                                 >
                             </div>
                             <div class="col-8">
-                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text">{{ item.description }}</p>
                             </div>
                         </div>
                         <!-- Adding + and - buttons for quantity control -->

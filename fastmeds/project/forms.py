@@ -116,10 +116,10 @@ class AddCategoryForm(FlaskForm):
     category_name = StringField("Category Name", validators = [InputRequired()])
     category_submit = SubmitField("Add Category")
 
-class AddProductForm(FlaskForm):
-    """Form for adding a tour."""
-    product_category = RadioField("Category", choices = [], validators = [InputRequired()])
-    product_name = StringField("Product Name", validators = [InputRequired()])
-    product_description = StringField("Description", validators = [InputRequired()])
-    product_price = DecimalField("Price", validators = [InputRequired()])
-    product_submit = SubmitField("Add Product")
+class AddItemForm(FlaskForm):
+    """Form for adding an item."""
+    item_category = RadioField("Category", choices = [], validators = [InputRequired()])
+    item_name = StringField("Item Name", validators = [InputRequired()])
+    item_description = StringField("Description", validators = [InputRequired()])
+    item_price = DecimalField("Price", validators = [InputRequired()])
+    item_submit = SubmitField("Add Item")

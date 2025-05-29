@@ -152,14 +152,3 @@ insert into deliveryOptions (deliveryOption) values
 ('Eco-Friendly Delivery'),
 ('Store Pick-Up');
 
--- Orders (linked to user)
--- INSERT INTO orders (userID, order_status, total_cost, userFirstName, userLastName, userEmail, userPhoneNumber)
--- VALUES
--- (1, 'Pending', 149.99, 'Dummy', 'Foobar', 'dummy@foobar.com', '1234567890'),
--- (1, 'Confirmed', 1000.00, 'Dummy', 'Foobar', 'dummy@foobar.com', '1234567890');
-
--- Order items
--- INSERT INTO order_items (orderID, itemID, quantity) VALUES
--- (1, 1, 1),
--- (1, 3, 1),
--- (2, 2, 2);

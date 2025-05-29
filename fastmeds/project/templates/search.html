@@ -5,18 +5,18 @@
     <div class="container text-center">
         <h3>Results for "{{ query }}"</h3>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 justify-content-center" style="margin:10px;">
-        {% for product in results %}
+        {% for item in results %}
         <div class="col prod_card"><div class="card">
-            <a href="{{ url_for('main.product_details', product_id=product.id) }}">
-                <img src="{{ url_for('static', filename='img/' + product.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
+            <a href="{{ url_for('main.item_details', item_id=item.id) }}">
+                <img src="{{ url_for('static', filename='img/' + item.name.split(' ')[0] +'.jpg') }}" class="card-img-top" alt="card-img-top">
             </a>
             <div class="card-body d-grid gap-2">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <h2>$ {{ product.price }}</h2>
+                <h5 class="card-title">{{ item.name }}</h5>
+                <h2>$ {{ item.price }}</h2>
             </div>
             <div class="card-footer">
                 <form method="POST"
-                      action="{{ url_for('main.adding_to_basket', product_id = product.id) }}">
+                      action="{{ url_for('main.adding_to_basket', item_id = item.id) }}">
                     <input
                             type="submit"
                             value="+ Add to Basket"

@@ -5,7 +5,7 @@
 {% block head %}
 <h1 class="display-5 text-center mt-3 mb-3">Manage  Data</h1>
 <p class="lead text-center">
-    These forms are for adding new categories and products for users to book.
+    These forms are for adding new categories and items for users to book.
 </p>
 {% endblock %}
 
@@ -28,13 +28,13 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Add Product
+                    Add Item
                 </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionBasic">
                 <div class="accordion-body">
-                    <h2>Add a new product to the database.</h2>
-                    {{ wtf.render_form(productform) }}
+                    <h2>Add a new item to the database.</h2>
+                    {{ wtf.render_form(itemform) }}
                 </div>
             </div>
         </div>

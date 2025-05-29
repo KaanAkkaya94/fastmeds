@@ -1,4 +1,4 @@
-from project.db import get_product
+from project.db import get_item
 from project.models import Basket, BasketItem
 from project.models import UserInfo, Order, OrderStatus
 import pprint
@@ -19,22 +19,23 @@ def get_user():
         )
     return None
 
+
 def get_basket():
     basket_data = session.get('basket')
     user = get_user()
     user_id = user.id if user else None
     basket = Basket(user_id)
     if isinstance(basket_data, dict):
-            for item in basket_data.get('items', []):
-                product_id = item.get('product', {}).get('id')
-                if product_id:
-                    product = get_product(product_id)
-                    if product:
-                        basket.add_item(BasketItem(
-                            id=str(item.get('id')),
-                            product=product,
-                            quantity=item.get('quantity', 1)
-                        ))
+        for item_data in basket_data.get('items', []):
+            item_id = item_data.get('item', {}).get('id')
+            if item_id:
+                item_obj = get_item(item_id)
+                if item_obj:
+                    basket.add_item(BasketItem(
+                        id=str(item_data.get('id')),
+                        item=item_obj,
+                        quantity=item_data.get('quantity', 1)
+                    ))
     return basket
 
 def _save_basket_to_session(basket):
@@ -43,16 +44,16 @@ def _save_basket_to_session(basket):
             {
                 'id': item.id,
                 'quantity': item.quantity,
-                'product': {
-                    'id': item.product.id
+                'item': {
+                    'id': item.item.id
                 }
             } for item in basket.items
         ]
     }
 
-def add_to_basket(product_id, quantity=1):
+def add_to_basket(item_id, quantity=1):
      basket = get_basket()
-     basket.add_item(BasketItem(product=get_product(product_id), quantity=quantity))
+     basket.add_item(BasketItem(item=get_item(item_id), quantity=quantity))
      _save_basket_to_session(basket)
 
 def remove_from_basket(basket_item_id):

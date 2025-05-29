@@ -13,14 +13,8 @@ def get_items():
     cur.close()
     return [Item(str(row['itemID']), row['itemName'], row['itemDescription'], row['itemCategory'], row['itemPrice']) for row in results]
 
-# def get_product(itemID):
-#     cur = mysql.connection.cursor()
-#     cur.execute("SELECT itemID, itemName, itemDescription, itemCategory, itemPrice, itemPicture FROM items WHERE itemID = %s", (itemID,))
-#     row = cur.fetchone()
-#     cur.close()
-#     return Item(str(row['itemID']), row['itemName'], row['itemDescription'], row['itemCategory'], row['itemPrice']) if row else None
-
-def get_product(itemID):
+#Function to get a specific item from the db
+def get_item(itemID):
     cur = mysql.connection.cursor()
     cur.execute("""
         SELECT p.itemID, p.itemName, p.itemDescription, p.itemPrice, p.itemPicture,
@@ -69,22 +63,6 @@ def get_items_for_category(categoryID):
              row['itemCategory'], row['itemPrice'])
         for row in results
     ]
-
-
-
-#Commented out as it is not used in the current implementation
-
-def get_tours():
-    """Get all tours."""
-    return Tours
-
-def get_tour(tour_id):
-    """Get a tour by its ID."""
-    tour_id = str(tour_id)
-    for tour in Tours:
-        if tour.id == tour_id:
-            return tour
-    return DummyTour
 
     
 
@@ -275,11 +253,11 @@ def add_category(category):
     mysql.connection.commit()
     cur.close()
 
-def add_product(product):
+def add_item(item):
     cur = mysql.connection.cursor()
     cur.execute("""
         INSERT INTO items (itemCategory, itemName, itemDescription, itemPrice)
         VALUES (%s, %s, %s, %s)
-    """, (int(product.category.id), product.name, product.description, float(product.price) ))
+    """, (int(item.category.id), item.name, item.description, float(item.price) ))
     mysql.connection.commit()
     cur.close()

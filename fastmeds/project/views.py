@@ -5,10 +5,10 @@ from hashlib import sha256
 
 from project.db import get_orders, check_for_user, add_user, user_already_exists
 
-from project.db import get_categories, get_items_for_category, get_category, get_product, search_items, is_admin, add_category, add_product
+from project.db import get_categories, get_items_for_category, get_category, get_item, search_items, is_admin, add_category, add_item
 
 from project.session import get_basket, add_to_basket, remove_from_basket, empty_basket, convert_basket_to_order, _save_basket_to_session, get_user
-from project.forms import NewCheckoutForm, LoginForm, RegisterForm, orderCheckout, AddCategoryForm, AddProductForm
+from project.forms import NewCheckoutForm, LoginForm, RegisterForm, orderCheckout, AddCategoryForm, AddItemForm
 from project.models import Category, Item
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import mysql
@@ -22,20 +22,20 @@ def index():
     return render_template('index.html', categories = get_categories())
 
 @bp.route('/category/<int:categoryid>/')
-def products(categoryid):
-    products = get_items_for_category(categoryid)
-    return render_template('products.html', products = products, category= get_category(categoryid))
+def items(categoryid):
+    items = get_items_for_category(categoryid)
+    return render_template('items.html', items = items, category= get_category(categoryid))
 
-@bp.route('/product/<int:product_id>/')
-def product_details(product_id):
-    product = get_product(product_id)
-    return render_template('product_details.html', product=product)
+@bp.route('/item/<int:item_id>/')
+def item_details(item_id):
+    item = get_item(item_id)
+    return render_template('item_details.html', item=item)
 
 
 @bp.route('/order/', methods = ['POST', 'GET'])
 def order():
 
-    product_id = request.args.get('product_id')
+    item_id = request.args.get('item_id')
     # is this a new order?
     if 'order_id'not in session:
         session['order_id'] = 1 # arbitry, we could set either order 1 or order 2
@@ -43,14 +43,14 @@ def order():
     #retrieve correct order object
     order = get_basket()
     # are we adding an item? - will be implemented later with DB
-    if product_id:
-        print('user requested to add product id = {}'.format(product_id))
+    if item_id:
+        print('user requested to add item id = {}'.format(item_id))
 
     return render_template('order.html', order = order, totalprice = order.total_cost())
 
-@bp.post('/basket/<int:product_id>/')
-def adding_to_basket(product_id):
-    add_to_basket(product_id)
+@bp.post('/basket/<int:item_id>/')
+def adding_to_basket(item_id):
+    add_to_basket(item_id)
     return redirect(url_for('main.order'))
 
 @bp.post('/basket/<int:tour_id>/<int:quantity>/')
@@ -70,7 +70,7 @@ def remove_basketitem(item_id):
     item = basket.get_item(item_id)
 
     if item:
-        flash(f"Removed '{item.product.name}' from basket.")
+        flash(f"Removed '{item.item.name}' from basket.")
         remove_from_basket(item_id)
     else:
         flash("Item not found in basket.", "warning")
@@ -128,7 +128,7 @@ def order_summary():
             cur.execute("""
                 INSERT INTO order_items (orderID, itemID, quantity)
                 VALUES (%s, %s, %s)
-            """, (order_id, item.product.id, item.quantity))
+            """, (order_id, item.item.id, item.quantity))
         mysql.connection.commit()
         cur.close()
 
@@ -216,16 +216,16 @@ def manage():
     # now we know the user is logged in and is an admin
     # we can show the manage panel
     categoryform = AddCategoryForm()
-    productform = AddProductForm()
+    itemform = AddItemForm()
     # we need to populate the items in the tourform
-    productform.product_category.choices = [(category.id, category.name) for category in get_categories()]
-    return render_template('manage.html', categoryform=categoryform, productform=productform)
+    itemform.item_category.choices = [(category.id, category.name) for category in get_categories()]
+    return render_template('manage.html', categoryform=categoryform, itemform=itemform)
 
 @bp.post('/manage/')
 def handle_manage():
     categoryform = AddCategoryForm()
-    productform = AddProductForm()
-    productform.product_category.choices = [(category.id, category.name) for category in get_categories()]
+    itemform = AddItemForm()
+    itemform.item_category.choices = [(category.id, category.name) for category in get_categories()]
     try:
         if categoryform.validate_on_submit():
             # Add the new category to the database
@@ -235,19 +235,19 @@ def handle_manage():
             )
             add_category(category)
             flash('Category added successfully!')
-        elif productform.validate_on_submit():
-            # Add the new product to the database
-            product = Item(
+        elif itemform.validate_on_submit():
+            # Add the new item to the database
+            item = Item(
                 id=0,
-                name=productform.product_name.data,
-                description=productform.product_description.data,
-                price=float(productform.product_price.data),
-                category=get_category(productform.product_category.data)
+                name=itemform.item_name.data,
+                description=itemform.item_description.data,
+                price=float(itemform.item_price.data),
+                category=get_category(itemform.item_category.data)
             )
-            add_product(product)
-            flash('Product added successfully!')
+            add_item(item)
+            flash('item added successfully!')
         else:
-            flash('Failed to add category or product. Please check your input.')
+            flash('Failed to add category or item. Please check your input.')
     except Exception as e:
         flash(f'An error occurred: {e}', 'error')
     return redirect(url_for('main.index'))

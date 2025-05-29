@@ -9,7 +9,7 @@
         <h1>Order Summary</h1>
         <ul>
             {% for item in basket.items %}
-            <li>{{ item.product.name }} (x{{ item.quantity }}) - ${{ "%.2f"|format(item.product.price * item.quantity) }}</li>
+            <li>{{ item.item.name }} (x{{ item.quantity }}) - ${{ "%.2f"|format(item.item.price * item.quantity) }}</li>
             {% endfor %}
         </ul>
         <!-- total price  -->

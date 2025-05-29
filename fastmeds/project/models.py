@@ -39,12 +39,12 @@ class UserInfo:
 
 @dataclass 
 class BasketItem:
-    product: Item
+    item: Item
     quantity: int = 1
     id: str = field(default_factory=lambda: str(uuid4()))
 
     def total_price(self):
-        return self.product.price * self.quantity
+        return self.item.price * self.quantity
 
     def increment_quantity(self):
         self.quantity += 1
