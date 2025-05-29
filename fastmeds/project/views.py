@@ -3,13 +3,13 @@ from flask import redirect, url_for
 
 from hashlib import sha256
 
-from miltontours.db import get_orders, check_for_user, add_user, user_already_exists
+from project.db import get_orders, check_for_user, add_user, user_already_exists
 
-from miltontours.db import get_categories, get_items_for_category, get_category, get_product, search_items, is_admin, add_category, add_product
+from project.db import get_categories, get_items_for_category, get_category, get_product, search_items, is_admin, add_category, add_product
 
-from miltontours.session import get_basket, add_to_basket, remove_from_basket, empty_basket, convert_basket_to_order, _save_basket_to_session, get_user
-from miltontours.forms import NewCheckoutForm, LoginForm, RegisterForm, orderCheckout, AddCategoryForm, AddProductForm
-from miltontours.models import Category, Item
+from project.session import get_basket, add_to_basket, remove_from_basket, empty_basket, convert_basket_to_order, _save_basket_to_session, get_user
+from project.forms import NewCheckoutForm, LoginForm, RegisterForm, orderCheckout, AddCategoryForm, AddProductForm
+from project.models import Category, Item
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import mysql
 

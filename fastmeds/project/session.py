@@ -1,6 +1,6 @@
-from miltontours.db import get_product
-from miltontours.models import Basket, BasketItem
-from miltontours.models import UserInfo, Order, OrderStatus
+from project.db import get_product
+from project.models import Basket, BasketItem
+from project.models import UserInfo, Order, OrderStatus
 import pprint
 
 from flask import session
@@ -10,15 +10,14 @@ def get_user():
     if user_dict:
         return UserInfo(
             id=str(user_dict['user_id']),
-            username=user_dict['username'],
-            userpassword=user_dict['userpassword'],
+            username=session.get('username'),
+            userpassword=session.get('userpassword'),
             firstname=user_dict['firstname'],
             surname=user_dict['surname'],
             email=user_dict['email'],
             phone=user_dict['phone']
         )
     return None
-
 
 def get_basket():
     basket_data = session.get('basket')

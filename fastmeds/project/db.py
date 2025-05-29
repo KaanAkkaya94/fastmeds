@@ -1,19 +1,9 @@
 
-from miltontours.models import Item, Category, Order, OrderStatus, UserInfo, City, Tour
-from miltontours.models import UserAccount, Basket
+from project.models import Item, Category, Order, OrderStatus, UserInfo, City, Tour
+from project.models import UserAccount, Basket
 from datetime import datetime
 from . import mysql
 
-DummyUserInfo = UserInfo(
-    '0', 'Dummy', 'Foobar', 'dummy@foobar.com', '1234567890'
-)
-
-Users = [
-    UserAccount('admin', 'admin', 'foobar@mail.com',
-                UserInfo('1', 'Admin', 'User', 'foobar@mail.com',
-                         '1234567890')
-    ),
-]
 
 #function to get all items from the db
 def get_cities():
@@ -152,8 +142,8 @@ def add_tour(item):
 
 
 
-# from miltontours.models import Basket, BasketItem, get_item
-# from miltontours.session import get_basket, _save_basket_to_session
+# from project.models import Basket, BasketItem, get_item
+# from project.session import get_basket, _save_basket_to_session
 #function to add item to the basket of the user
 def add_to_basket(itemID, quantity = 1):
     basket = get_basket()

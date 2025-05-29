@@ -68,13 +68,17 @@ class OrderStatus(Enum):
     CONFIRMED = 'Confirmed'
     CANCELLED = 'Cancelled'
 
+
 @dataclass
 class UserInfo:
     id: str
+    username: str
+    userpassword: str
     firstname: str
     surname: str
     email: str
     phone: str
+
 
 @dataclass 
 class BasketItem:
