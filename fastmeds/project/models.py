@@ -4,50 +4,7 @@ from typing import List
 from enum import Enum
 from uuid import uuid4
 
-#KILL
-class OldCity:
-    def __init__(self, id, name, description, image, price):
-        self.id = id
-        self.name = name
-        self.description = description
-        self.image = image
-        self.price = price
 
-    def get_city_details(self):
-        return str(self)
-
-    def __repr__(self):
-        str = "ID: {}, Name: {}, Description: {}, Image: {} \n"
-        str = str.format( self.id, self.name, self.description, self.image)
-        return str
-
-# we can save ourselves some time by using the dataclass decorator
-# to create the class and its methods
-# this will create the __init__ and __repr__ methods for us
-# and we can add our own methods as needed
-
-#KILL
-@dataclass
-class City:
-    id: str
-    name: str
-    description: str = 'fooobar'
-    price = float
-    image: str = 'foobar.png'
-
-
-#KILL
-@dataclass
-class Tour:
-    id: str
-    name: str
-    description: str
-    city: City
-    image: str = 'foobar.png'
-    price: float = 10.00
-    date: datetime = field(
-        default_factory=lambda: datetime.now()
-    )
 
 @dataclass
 class Category:

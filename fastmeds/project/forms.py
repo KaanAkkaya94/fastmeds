@@ -112,7 +112,7 @@ class orderCheckout(FlaskForm):
     payment = SubmitField("Pay Now")
 
 class AddCategoryForm(FlaskForm):
-    """Form for adding a city."""
+    """Form for adding a category."""
     category_name = StringField("Category Name", validators = [InputRequired()])
     category_submit = SubmitField("Add Category")
 

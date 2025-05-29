@@ -19,7 +19,7 @@ insert into categories (categoryName) values
 ('Vitamins');
 
 
-create table cities(
+create table items(
 	itemID int auto_increment not null primary key,
     itemName varchar(50) not null,
     itemDescription varchar(250) not null,
@@ -29,7 +29,7 @@ create table cities(
     foreign key (itemCategory) references categories(categoryID)
 );
 
-insert into cities (itemName, itemDescription, itemCategory, itemPrice) values
+insert into items (itemName, itemDescription, itemCategory, itemPrice) values
 # Analgesics
 ('Paramol 500mg', 'Generic description for medicine.', 1, 4.99),
 ('Irofen 200mg', 'Generic description for medicine.', 1, 4.99),
@@ -62,8 +62,8 @@ insert into cities (itemName, itemDescription, itemCategory, itemPrice) values
 
 
 
-select i.itemName as city, c.categoryName as categories, i.itemDescription AS description, i.itemPrice AS price
-from cities i
+select i.itemName as items, c.categoryName as categories, i.itemDescription AS description, i.itemPrice AS price
+from items i
 join categories c on i.itemCategory = c.categoryID
 order by c.categoryName;
 
@@ -133,7 +133,7 @@ CREATE TABLE order_items (
     itemID INT,
     quantity INT DEFAULT 1,
     FOREIGN KEY (orderID) REFERENCES orders(orderID) ON DELETE CASCADE,
-    FOREIGN KEY (itemID) REFERENCES cities(itemID)
+    FOREIGN KEY (itemID) REFERENCES items(itemID)
 );
 
 

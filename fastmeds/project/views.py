@@ -16,7 +16,7 @@ from . import mysql
 #groups all names under the namespace
 bp = Blueprint('main', __name__)
 
-#if homepages get visited, gets all cities
+#if homepages get visited, gets all items
 @bp.route('/')
 def index():
     return render_template('index.html', categories = get_categories())
@@ -77,50 +77,6 @@ def remove_basketitem(item_id):
 
     return redirect(url_for('main.order'))
 
-# @bp.route('/order/summary', methods=['GET', 'POST'])
-# def order_summary():
-#     form = NewCheckoutForm()
-#     basket = get_basket()
-#     if form.validate_on_submit():
-#         # Handle payment and order logic here
-#         flash('Payment successful! Your order has been placed.', 'success')
-#         return redirect(url_for('main.index'))
-#     return render_template('orderSummary.html', form=form, basket=basket)
-
-# This is to checkout the order with updated information
-# @bp.route('/checkout/', methods = ['POST', 'GET'])
-# def checkout():
-#     form = NewCheckoutForm() 
-#     basket = get_basket()
-#     if request.method == 'POST':
-        
-#         #retrieve correct order object
-#         order = get_basket()
-       
-#         if form.validate_on_submit():
-#             order.status = True
-#             order.firstname = form.firstname.data
-#             order.surname = form.surname.data
-#             order.email = form.email.data
-#             order.phone = form.phone.data
-#             order.address = form.address.data
-#             order.city = form.city.data
-#             order.postcode = form.postcode.data
-#             order.state = form.state.data
-#             order.delivery = form.delivery.data
-#             order.payment = form.payment.data
-
-#             flash('Thank you for your information, your order is being processed!',)
-#             order = convert_basket_to_order(get_basket())
-#             empty_basket()
-#             # add_order(order)
-#             print('Number of orders in db: {}'.format(len(get_orders())))
-#             return redirect(url_for('main.orderSummary'))
-#         else:
-#             flash('The provided information is missing or incorrect',
-#                   'error')
-
-#     return render_template('checkout.html', form = form, basket = basket)
 
 @bp.route('/checkout/', methods=['POST', 'GET'])
 def checkout():
@@ -261,7 +217,7 @@ def manage():
     # we can show the manage panel
     categoryform = AddCategoryForm()
     productform = AddProductForm()
-    # we need to populate the cities in the tourform
+    # we need to populate the items in the tourform
     productform.product_category.choices = [(category.id, category.name) for category in get_categories()]
     return render_template('manage.html', categoryform=categoryform, productform=productform)
 

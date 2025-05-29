@@ -1,21 +1,21 @@
 
-from project.models import Item, Category, Order, OrderStatus, UserInfo, City, Tour
+from project.models import Item, Category, Order, OrderStatus, UserInfo
 from project.models import UserAccount, Basket
 from datetime import datetime
 from . import mysql
 
 
 #function to get all items from the db
-def get_cities():
+def get_items():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT itemID, itemName, itemDescription, itemCategory, itemPrice FROM cities")
+    cur.execute("SELECT itemID, itemName, itemDescription, itemCategory, itemPrice FROM items")
     results = cur.fetchall()
     cur.close()
     return [Item(str(row['itemID']), row['itemName'], row['itemDescription'], row['itemCategory'], row['itemPrice']) for row in results]
 
 # def get_product(itemID):
 #     cur = mysql.connection.cursor()
-#     cur.execute("SELECT itemID, itemName, itemDescription, itemCategory, itemPrice, itemPicture FROM cities WHERE itemID = %s", (itemID,))
+#     cur.execute("SELECT itemID, itemName, itemDescription, itemCategory, itemPrice, itemPicture FROM items WHERE itemID = %s", (itemID,))
 #     row = cur.fetchone()
 #     cur.close()
 #     return Item(str(row['itemID']), row['itemName'], row['itemDescription'], row['itemCategory'], row['itemPrice']) if row else None
@@ -25,7 +25,7 @@ def get_product(itemID):
     cur.execute("""
         SELECT p.itemID, p.itemName, p.itemDescription, p.itemPrice, p.itemPicture,
                c.categoryID, c.categoryName
-        FROM cities p
+        FROM items p
         JOIN categories c ON p.itemCategory = c.categoryID
         WHERE p.itemID = %s
     """, (itemID,))
@@ -57,7 +57,7 @@ def get_items_for_category(categoryID):
     cur.execute("""SELECT i.itemID, i.itemName, i.itemDescription, i.itemCategory,
                           i.itemPrice, i.itemPicture,
                           c.categoryID, c.categoryName
-                   FROM cities i
+                   FROM items i
                    JOIN categories c ON i.itemCategory = c.categoryID
                    WHERE c.categoryID = %s""", (categoryID,))
 
@@ -86,11 +86,7 @@ def get_tour(tour_id):
             return tour
     return DummyTour
 
-def get_tours_for_city(city_id):
-    """Get all tours for a given city ID."""
-    city_id = str(city_id)
-    return [tour for tour in Tours if tour.city.id == city_id]
-
+    
 
 def add_to_basket(itemID, quantity=1):
     cur = mysql.connection.cursor()
@@ -126,7 +122,7 @@ def remove_all_items_from_basket(basket):
 
 
 #SQL query to add a new category to the database
-def add_city(category):
+def ad(category):
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO categories(categoryName) VALUES (%s)", (category.name))
     mysql.connection.commit()
@@ -195,7 +191,7 @@ def search_items(query):
     cur.execute("""
         SELECT i.itemID, i.itemName, i.itemDescription, i.itemCategory, i.itemPrice, i.itemPicture,
                c.categoryID, c.categoryName
-        FROM cities i
+        FROM items i
         JOIN categories c ON i.itemCategory = c.categoryID
         WHERE i.itemName LIKE %s OR i.itemDescription LIKE %s
     """, (query + '%', query + '%'))
@@ -238,7 +234,7 @@ def check_for_user(username, password):
     cur.close()
     if row:
         return UserAccount(row['userName'], row['userPassword'], row['userEmail'],
-                           UserInfo(str(row['userID']), row['userFirstName'], row['userLastName'],
+                           UserInfo(str(row['userID']), row['userName'], row['userPassword'],row['userFirstName'], row['userLastName'],
                                     row['userEmail'], row['userPhoneNumber']))
     return None
 
@@ -282,7 +278,7 @@ def add_category(category):
 def add_product(product):
     cur = mysql.connection.cursor()
     cur.execute("""
-        INSERT INTO cities (itemCategory, itemName, itemDescription, itemPrice)
+        INSERT INTO items (itemCategory, itemName, itemDescription, itemPrice)
         VALUES (%s, %s, %s, %s)
     """, (int(product.category.id), product.name, product.description, float(product.price) ))
     mysql.connection.commit()
