@@ -282,7 +282,7 @@ def add_category(category):
 def add_product(product):
     cur = mysql.connection.cursor()
     cur.execute("""
-        INSERT INTO cities (itemCategory, itemName, itemDescription, , itemPrice)
+        INSERT INTO cities (itemCategory, itemName, itemDescription, itemPrice)
         VALUES (%s, %s, %s, %s)
     """, (int(product.category.id), product.name, product.description, float(product.price) ))
     mysql.connection.commit()
