@@ -34,14 +34,14 @@
                   </div>
                   <!--Basket button which redirects to basket.html website-->
                     {% if session['user'] and session['user']['is_admin'] %}
-                    <a class="btn" href="{{ url_for('main.manage') }} " role="button" style="margin-right: 5px;">ADMIN</a>
+                    <a id="basket" class="btn" href="{{ url_for('main.manage') }} " role="button" style="margin-right: 5px;">ADMIN</a>
                     {% endif %}
                     {% if session['user'] %}
-                    <a class="btn btn-outline-light" href="{{ url_for('main.logout') }}" role="button" style="margin-right: 5px;">Logout</a>
+                    <a  id="logout" class="btn btn-outline-light" href="{{ url_for('main.logout') }}" role="button" style="margin-right: 5px;">Logout</a>
                     {% else %}
-                    <a class="btn btn-outline-light" href="{{ url_for('main.login') }}" role="button" style="margin-right: 5px;">Login</a>
+                    <a id="login" class="btn btn-outline-light" href="{{ url_for('main.login') }}" role="button" style="margin-right: 5px;">Login</a>
                     {% endif %}
-                  <a class="btn" href="{{ url_for('main.order') }}" role="button"><i class="bi bi-cart3" style="margin-right: 5px;"></i>Basket</a>
+                  <a id="basket" class="btn" href="{{ url_for('main.order') }}" role="button"><i class="bi bi-cart3" style="margin-right: 5px;"></i>Basket</a>
                 </div>
               </div>
             </nav>
