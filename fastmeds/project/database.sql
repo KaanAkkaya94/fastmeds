@@ -106,12 +106,12 @@ create table users(
 );
 
 insert into users (userName, userPassword, userFirstName, userLastName, userEmail, userPhoneNumber, userAdress, userState, userPostcode) values
-('Admin1', '1234', 'Kate', 'Smith', 'admin@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
-('Admin2', '1234', 'Matthew', 'Brown', 'brown@gmail.com', '04125656', '7 Main st', 'Queensland', '4215'),
-('Zulfiia', '1234', 'Zulfiia', 'Suleimanova', 'sul@gmail.com', '0768788', '7 Main st', 'Queensland', '4215'),
-('Steven', '1234', 'Steven', 'Steven', 'steven@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
-('Kaan', '1234', 'Kaan', 'Kaan', 'kaan@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
-('Hugh', '1234', 'Hugh', 'Jackman', 'wolverine@gmail.com', '04123455', 'Arctic region', 'Queensland', '4215');
+('Admin1', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Kate', 'Smith', 'admin@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Admin2', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', 'Matthew', 'Brown', 'brown@gmail.com', '04125656', '7 Main st', 'Queensland', '4215'),
+('Zulfiia', '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c', 'Zulfiia', 'Suleimanova', 'sul@gmail.com', '0768788', '7 Main st', 'Queensland', '4215'),
+('Steven', '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c', 'Steven', 'Steven', 'steven@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Kaan', '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c', 'Kaan', 'Kaan', 'kaan@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Hugh', '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c', 'Hugh', 'Jackman', 'wolverine@gmail.com', '04123455', 'Arctic region', 'Queensland', '4215');
 
 create table admins(
 	userID int auto_increment not null primary key

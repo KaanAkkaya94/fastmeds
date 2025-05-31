@@ -59,6 +59,11 @@ class Basket:
     items: List[BasketItem] = field(default_factory=lambda: [])
 
     def add_item(self, item: BasketItem):
+        # Check if product already in basket (by product id)
+        for basket_item in self.items:
+            if basket_item.product.id == item.product.id:
+                basket_item.quantity += item.quantity
+                return
         self.items.append(item)
 
     def remove_item(self, item_id: str):

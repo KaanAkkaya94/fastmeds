@@ -67,9 +67,9 @@ def adding_to_basket(product_id):
     add_to_basket(product_id)
     return redirect(url_for('main.order'))
 
-@bp.post('/basket/<int:tour_id>/<int:quantity>/')
-def adding_to_basket_with_quantity(tour_id, quantity):
-    add_to_basket(tour_id, quantity)
+@bp.post('/basket/<int:item_id>/<int:quantity>/')
+def adding_to_basket_with_quantity(item_id, quantity):
+    add_to_basket(item_id, quantity)
     return redirect(url_for('main.order'))
 
 @bp.post('/clearbasket/')
@@ -160,12 +160,15 @@ def register():
     form = RegisterForm()
     if request.method == 'POST':
         if form.validate_on_submit():
+            # Hash the password
+            form.password.data = sha256(form.password.data.encode()).hexdigest()
+            user = check_for_user(form.username.data, form.password.data)
 
-            if user_already_exists(form.username.data, form.email.data):
+            # if user_already_exists(form.username.data, form.email.data):
+            if user:
                 flash('User NAME or EMAIL already exists. Please choose a different user name or email.', 'error')
                 return redirect(url_for('main.register'))
-            # Hash the password
-            #hashed_password = generate_password_hash(form.password.data, method='sha256')
+
             # Add user to the database
             if add_user(form):
                 flash('Registration successful! You can now log in.', 'success')
@@ -181,7 +184,7 @@ def login():
     if request.method == 'POST':
 
         if form.validate_on_submit():
-            #form.password.data = sha256(form.password.data.encode()).hexdigest()
+            form.password.data = sha256(form.password.data.encode()).hexdigest()
             # Check if the user exists in the database
             user = check_for_user(
                 form.username.data, form.password.data
@@ -231,7 +234,7 @@ def manage():
     # we can show the manage panel
     categoryform = AddCategoryForm()
     productform = AddProductForm()
-    # we need to populate the items in the tourform
+
     productform.product_category.choices = [(category.id, category.name) for category in get_categories()]
     return render_template('manage.html', categoryform=categoryform, productform=productform)
 
