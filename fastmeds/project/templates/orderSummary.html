@@ -3,7 +3,7 @@
 {% import 'bootstrap5/form.html' as wtf %}
 
 {% block main %}
-<section class="shadow-sm mb-5 mt-5">  
+<section class="mb-5 mt-5">
     <div class="container text-center">
 
         <h1>Order Summary</h1>
@@ -20,13 +20,10 @@
             <div class="col-md-6">
                 {{ wtf.render_form(form) }}
             </div>
-                
         </div>
         <form method="POST">
-    {{ form.hidden_tag() }}
-    </form>
+            {{ form.hidden_tag() }}
+        </form>
     </div>
-
-
 </section>
 {% endblock %}

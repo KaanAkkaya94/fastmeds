@@ -105,6 +105,14 @@ create table users(
     foreign key (basketID) references basket(basketID)
 );
 
+insert into users (userName, userPassword, userFirstName, userLastName, userEmail, userPhoneNumber, userAdress, userState, userPostcode) values
+('Admin1', '1234', 'Kate', 'Smith', 'admin@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Admin2', '1234', 'Matthew', 'Brown', 'brown@gmail.com', '04125656', '7 Main st', 'Queensland', '4215'),
+('Zulfiia', '1234', 'Zulfiia', 'Suleimanova', 'sul@gmail.com', '0768788', '7 Main st', 'Queensland', '4215'),
+('Steven', '1234', 'Steven', 'Steven', 'steven@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Kaan', '1234', 'Kaan', 'Kaan', 'kaan@gmail.com', '04123455', '7 Main st', 'Queensland', '4215'),
+('Hugh', '1234', 'Hugh', 'Jackman', 'wolverine@gmail.com', '04123455', 'Arctic region', 'Queensland', '4215');
+
 create table admins(
 	userID int auto_increment not null primary key
 );
@@ -151,15 +159,3 @@ insert into deliveryOptions (deliveryOption) values
 ('Express Delivery'),
 ('Eco-Friendly Delivery'),
 ('Store Pick-Up');
-
--- Orders (linked to user)
--- INSERT INTO orders (userID, order_status, total_cost, userFirstName, userLastName, userEmail, userPhoneNumber)
--- VALUES
--- (1, 'Pending', 149.99, 'Dummy', 'Foobar', 'dummy@foobar.com', '1234567890'),
--- (1, 'Confirmed', 1000.00, 'Dummy', 'Foobar', 'dummy@foobar.com', '1234567890');
-
--- Order items
--- INSERT INTO order_items (orderID, itemID, quantity) VALUES
--- (1, 1, 1),
--- (1, 3, 1),
--- (2, 2, 2);

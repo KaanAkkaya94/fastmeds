@@ -117,7 +117,7 @@ class AddCategoryForm(FlaskForm):
     category_submit = SubmitField("Add Category")
 
 class AddProductForm(FlaskForm):
-    """Form for adding a tour."""
+    """Form for adding a product."""
     product_category = RadioField("Category", choices = [], validators = [InputRequired()])
     product_name = StringField("Product Name", validators = [InputRequired()])
     product_description = StringField("Description", validators = [InputRequired()])

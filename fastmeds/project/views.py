@@ -32,21 +32,35 @@ def product_details(product_id):
     return render_template('product_details.html', product=product)
 
 
-@bp.route('/order/', methods = ['POST', 'GET'])
-def order():
+# @bp.route('/order/', methods = ['POST', 'GET'])
+# def order():
 
-    product_id = request.args.get('product_id')
-    # is this a new order?
-    if 'order_id'not in session:
-        session['order_id'] = 1 # arbitry, we could set either order 1 or order 2
+#     product_id = request.args.get('product_id')
+#     # is this a new order?
+#     if 'order_id'not in session:
+#         session['order_id'] = 1 # arbitry, we could set either order 1 or order 2
     
-    #retrieve correct order object
-    order = get_basket()
-    # are we adding an item? - will be implemented later with DB
-    if product_id:
-        print('user requested to add product id = {}'.format(product_id))
+#     #retrieve correct order object
+#     order = get_basket()
+#     # are we adding an item? - will be implemented later with DB
+#     if product_id:
+#         print('user requested to add product id = {}'.format(product_id))
 
-    return render_template('order.html', order = order, totalprice = order.total_cost())
+#     return render_template('order.html', order = order, totalprice = order.total_cost())
+
+@bp.route('/order/', methods=['POST', 'GET'])
+def order():
+    product_id = request.args.get('product_id')
+    if 'order_id' not in session:
+        session['order_id'] = 1  # arbitrary, for demo
+
+    order = get_basket()  # This should return an object with an .items attribute (list of BasketItem)
+    if product_id:
+        print(f'user requested to add product id = {product_id}')
+        # Add-to-basket logic would go here
+
+    return render_template('order.html', order=order, totalprice=order.total_cost())
+
 
 @bp.post('/basket/<int:product_id>/')
 def adding_to_basket(product_id):

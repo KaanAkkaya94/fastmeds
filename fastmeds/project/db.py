@@ -71,21 +71,6 @@ def get_items_for_category(categoryID):
     ]
 
 
-
-#Commented out as it is not used in the current implementation
-
-def get_tours():
-    """Get all tours."""
-    return Tours
-
-def get_tour(tour_id):
-    """Get a tour by its ID."""
-    tour_id = str(tour_id)
-    for tour in Tours:
-        if tour.id == tour_id:
-            return tour
-    return DummyTour
-
     
 
 def add_to_basket(itemID, quantity=1):
@@ -128,15 +113,6 @@ def ad(category):
     mysql.connection.commit()
     cur.close()
 
-#SQL query to add a new tour to the database
-def add_tour(item):
-    cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO items(itemName, itemDescription, itemCategory, itemPrice, itemPicture) VALUES (%s, %s, %s, %s, %s)", (item.name, item.description, item.category.name, item.price, item.picture))
-    mysql.connection.commit()
-    cur.close()
-
-
-
 
 # from project.models import Basket, BasketItem, get_item
 # from project.session import get_basket, _save_basket_to_session
@@ -153,10 +129,6 @@ def remove_from_basket(itemID, quantitiy=1):
     _save_basket_to_session(basket)
 
 
-#mine
-def add_tour(tour):
-    """Add a new tour."""
-    Tours.append(tour)
 
 # SQL query to get the basket of the user
 def get_order(basketID):
