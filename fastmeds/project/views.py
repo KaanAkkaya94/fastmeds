@@ -16,38 +16,24 @@ from . import mysql
 #groups all names under the namespace
 bp = Blueprint('main', __name__)
 
-#if homepages get visited, gets all items
+#if homepages get visited
 @bp.route('/')
 def index():
     return render_template('index.html', categories = get_categories())
 
+#products page for a specific category
 @bp.route('/category/<int:categoryid>/')
 def products(categoryid):
     products = get_items_for_category(categoryid)
     return render_template('products.html', products = products, category= get_category(categoryid))
 
+#product details page for a specific product
 @bp.route('/product/<int:product_id>/')
 def product_details(product_id):
     product = get_product(product_id)
     return render_template('product_details.html', product=product)
 
-
-# @bp.route('/order/', methods = ['POST', 'GET'])
-# def order():
-
-#     product_id = request.args.get('product_id')
-#     # is this a new order?
-#     if 'order_id'not in session:
-#         session['order_id'] = 1 # arbitry, we could set either order 1 or order 2
-    
-#     #retrieve correct order object
-#     order = get_basket()
-#     # are we adding an item? - will be implemented later with DB
-#     if product_id:
-#         print('user requested to add product id = {}'.format(product_id))
-
-#     return render_template('order.html', order = order, totalprice = order.total_cost())
-
+# Order page, where users can see their basket and add products
 @bp.route('/order/', methods=['POST', 'GET'])
 def order():
     product_id = request.args.get('product_id')
@@ -61,23 +47,26 @@ def order():
 
     return render_template('order.html', order=order, totalprice=order.total_cost())
 
-
+# Adding items to the basket
 @bp.post('/basket/<int:product_id>/')
 def adding_to_basket(product_id):
     add_to_basket(product_id)
     return redirect(url_for('main.order'))
 
+# Adding items to the basket with a specified quantity
 @bp.post('/basket/<int:item_id>/<int:quantity>/')
 def adding_to_basket_with_quantity(item_id, quantity):
     add_to_basket(item_id, quantity)
     return redirect(url_for('main.order'))
 
+# Clear the basket
 @bp.post('/clearbasket/')
 def clear_basket():
     empty_basket()
     flash('Basket cleared.')
     return redirect(url_for('main.order'))
 
+# Remove an item from the basket
 @bp.post('/removebasketitem/<string:item_id>/')
 def remove_basketitem(item_id):
     basket = get_basket()
@@ -91,26 +80,7 @@ def remove_basketitem(item_id):
 
     return redirect(url_for('main.order'))
 
-
-# @bp.route('/checkout/', methods=['POST', 'GET'])
-# def checkout():
-#     form = NewCheckoutForm() 
-#     basket = get_basket()
-#     if form.validate_on_submit():
-#         # Save form data to session
-#         session['order_info'] = {'firstname': form.firstname.data, 'surname': form.surname.data,
-#             'email': form.email.data, 'phone': form.phone.data,
-#             'address': form.address.data, 'city': form.city.data,
-#             'postcode': form.postcode.data, 'state': form.state.data, 'payment': form.payment.data
-#         }
-#         flash('Thank you for your information, please confirm your order.')
-#         return redirect(url_for('main.order_summary'))
-#     # elif request.method == 'POST':
-#     #     flash('The provided information is missing or incorrect', 'error')
-
-#     return render_template('checkout.html', form=form, basket=basket)
-
-
+# Checkout page where users can enter their details
 @bp.route('/checkout/', methods=['POST', 'GET'])
 def checkout():
     if 'user' not in session:
@@ -155,12 +125,12 @@ def checkout():
 
     return render_template('checkout.html', form=form, basket=basket)
 
-#Order success page
+# Success page after order confirmation
 @bp.route('/success/')
 def success():
     return render_template('success.html')
 
-#Order summary page
+# Order summary page where users can review their order before finalizing
 @bp.route('/order/summary', methods=['GET', 'POST'])
 def order_summary():
     user_id = get_user()
@@ -198,7 +168,7 @@ def order_summary():
 
     return render_template('orderSummary.html', basket=basket, order_info=order_info, form = form, totalprice = basket.total_cost())
 
-#This is to register a new user and add it to the database
+# Register a new user and add it to the database
 @bp.route('/register/', methods = ['POST', 'GET'])
 def register():
     form = RegisterForm()
@@ -222,6 +192,7 @@ def register():
                 return redirect(url_for('main.register'))
     return render_template('register.html', form=form)
 
+# Login page for users to access their accounts
 @bp.route('/login/', methods = ['POST', 'GET'])
 def login():
     form = LoginForm()
@@ -257,7 +228,7 @@ def login():
 
     return render_template('login.html', form = form)
 
-
+# Logout route to clear the session and redirect to the homepage
 @bp.route('/logout/')
 def logout():
     session.clear()
@@ -266,7 +237,7 @@ def logout():
     flash('You have been logged out.')
     return redirect(url_for('main.index'))
 
-
+# Manage orders and products, only accessible to admins
 @bp.route('/manage/')
 # @only_admins
 def manage():
@@ -285,6 +256,7 @@ def manage():
     productform.product_category.choices = [(category.id, category.name) for category in get_categories()]
     return render_template('manage.html', categoryform=categoryform, productform=productform)
 
+# Handle adding categories and products in the manage panel
 @bp.post('/manage/')
 def handle_manage():
     categoryform = AddCategoryForm()
@@ -316,6 +288,7 @@ def handle_manage():
         flash(f'An error occurred: {e}', 'error')
     return redirect(url_for('main.index'))
 
+# Update the quantity of an item in the basket
 @bp.post('/basket/update_quantity/<string:item_id>/<string:action>/')
 def update_quantity(item_id, action):
     basket = get_basket()
@@ -328,6 +301,7 @@ def update_quantity(item_id, action):
         _save_basket_to_session(basket)
     return redirect(url_for('main.order'))
 
+# Search functionality to find products by name or description
 @bp.route('/search')
 def search():
     query = request.args.get('q', '')

@@ -5,6 +5,7 @@ import pprint
 
 from flask import session
 
+# This module handles session management for user and basket data in a web application.
 def get_user():
     user_dict = session.get('user')
     if user_dict:
@@ -40,6 +41,7 @@ def get_basket():
                         ))
     return basket
 
+# Save the current basket to the session
 def _save_basket_to_session(basket):
     session['basket'] = {
         'items': [
@@ -53,21 +55,25 @@ def _save_basket_to_session(basket):
         ]
     }
 
+# Add a product to the basket with a specified quantity
 def add_to_basket(product_id, quantity=1):
      basket = get_basket()
      basket.add_item(BasketItem(product=get_product(product_id), quantity=quantity))
      _save_basket_to_session(basket)
 
+# Remove an item from the basket by its ID
 def remove_from_basket(basket_item_id):
     basket = get_basket()
     basket.remove_item(basket_item_id)
     _save_basket_to_session(basket)
 
+# Clear the basket by resetting it to an empty state
 def empty_basket():
     session['basket'] = {
         'items': []
     }
 
+# Convert the current basket to an order object
 def convert_basket_to_order(basket):
     return Order(
         id=None,
