@@ -207,7 +207,7 @@ def check_for_user(username, password):
     if row:
         return UserAccount(row['userName'], row['userPassword'], row['userEmail'],
                            UserInfo(str(row['userID']), row['userName'], row['userPassword'],row['userFirstName'], row['userLastName'],
-                                    row['userEmail'], row['userPhoneNumber']))
+                                    row['userEmail'], row['userPhoneNumber'], row['userAdress'], row['userState'], row['userPostcode']))
     return None
 
 def is_admin(user_id):

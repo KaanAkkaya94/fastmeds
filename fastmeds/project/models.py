@@ -35,6 +35,9 @@ class UserInfo:
     surname: str
     email: str
     phone: str
+    address: str 
+    city: str
+    postcode: str
 
 
 @dataclass 

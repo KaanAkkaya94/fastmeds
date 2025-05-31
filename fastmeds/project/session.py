@@ -15,7 +15,10 @@ def get_user():
             firstname=user_dict['firstname'],
             surname=user_dict['surname'],
             email=user_dict['email'],
-            phone=user_dict['phone']
+            phone=user_dict['phone'],
+            address=user_dict['address'],
+            city=user_dict['city'],
+            postcode=user_dict['postcode']
         )
     return None
 

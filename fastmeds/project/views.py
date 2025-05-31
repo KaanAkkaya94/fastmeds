@@ -92,24 +92,68 @@ def remove_basketitem(item_id):
     return redirect(url_for('main.order'))
 
 
+# @bp.route('/checkout/', methods=['POST', 'GET'])
+# def checkout():
+#     form = NewCheckoutForm() 
+#     basket = get_basket()
+#     if form.validate_on_submit():
+#         # Save form data to session
+#         session['order_info'] = {'firstname': form.firstname.data, 'surname': form.surname.data,
+#             'email': form.email.data, 'phone': form.phone.data,
+#             'address': form.address.data, 'city': form.city.data,
+#             'postcode': form.postcode.data, 'state': form.state.data, 'payment': form.payment.data
+#         }
+#         flash('Thank you for your information, please confirm your order.')
+#         return redirect(url_for('main.order_summary'))
+#     # elif request.method == 'POST':
+#     #     flash('The provided information is missing or incorrect', 'error')
+
+#     return render_template('checkout.html', form=form, basket=basket)
+
+
 @bp.route('/checkout/', methods=['POST', 'GET'])
 def checkout():
-    form = NewCheckoutForm() 
+    if 'user' not in session:
+        flash('Please log in to proceed to checkout.', 'error')
+        return redirect(url_for('main.login'))
+
+    form = NewCheckoutForm()
     basket = get_basket()
+    user = session['user']  # Use the session directly
+
+    if request.method == 'GET' and user:
+        form.firstname.data = user.get('firstname', '')
+        form.surname.data = user.get('surname', '')
+        form.email.data = user.get('email', '')
+        form.phone.data = user.get('phone', '')
+        form.address.data = user.get('address', '')
+        form.city.data = user.get('city', '')
+        form.postcode.data = user.get('postcode', '')
+        form.state.data = user.get('state', '')
+        print("FORM DATA:", form.data)
+
+    if request.method == 'POST':
+        print("POSTED DATA:", request.form)
+
     if form.validate_on_submit():
-        # Save form data to session
-        session['order_info'] = {'firstname': form.firstname.data, 'surname': form.surname.data,
-            'email': form.email.data, 'phone': form.phone.data,
-            'address': form.address.data, 'city': form.city.data,
-            'postcode': form.postcode.data, 'state': form.state.data, 'payment': form.payment.data
+        session['order_info'] = {
+            'firstname': form.firstname.data,
+            'surname': form.surname.data,
+            'email': form.email.data,
+            'phone': form.phone.data,
+            'address': form.address.data,
+            'city': form.city.data,
+            'postcode': form.postcode.data,
+            'state': form.state.data,
+            'payment': form.payment.data
         }
         flash('Thank you for your information, please confirm your order.')
         return redirect(url_for('main.order_summary'))
     elif request.method == 'POST':
+        print("FORM ERRORS:", form.errors)
         flash('The provided information is missing or incorrect', 'error')
 
     return render_template('checkout.html', form=form, basket=basket)
-
 
 #Order success page
 @bp.route('/success/')
@@ -199,6 +243,9 @@ def login():
                             'surname': user.info.surname,
                             'email': user.info.email,
                             'phone': user.info.phone,
+                            'address': user.info.address,
+                            'city': user.info.city,
+                            'postcode': user.info.postcode,
                             'is_admin': is_admin(user.info.id),
             }
             session['username'] = user.username

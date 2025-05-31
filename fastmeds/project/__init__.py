@@ -18,6 +18,7 @@ def create_app():
     app.config['MYSQL_DB'] = 'Fastmeds'
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+    app.config['WTF_CSRF_ENABLED'] = False
 
     mysql.init_app(app)
 

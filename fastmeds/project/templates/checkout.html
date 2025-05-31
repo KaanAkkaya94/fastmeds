@@ -9,17 +9,16 @@
             <div class="col-12">
                 <h1>Checkout</h1>
                 <p>
-                    <strong>Thank you for your interest.</strong>
-                </p>
-                <p>
-                    Please provide your details so one of our friendly team members can contact you to confirm your order and arrange payment.
-                    We appreciate your trust in us!
+                    <strong>Thank you for your interest. 
+                    Please complete the form below to proceed with your order.</strong>
                 </p>
             </div>
         </div>
         <div class="row mt-4 justify-content-center p-3">
             <div class="col-md-6">
+            <form method="POST">
                 {{ wtf.render_form(form) }}
+           </form>
             </div>
         </div>
     </div>
