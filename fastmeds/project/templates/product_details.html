@@ -32,6 +32,9 @@
                 <div class="card-body">
                   <h5 class="card-title">{{ product.name }}</h5>
                   <p class="card-text">{{ product.description}}</p>
+                  <div class="mb-2">
+                      <span class="badge bg-success in-stock-badge">IN STOCK</span>
+                  </div>
                   <p class="card-text"><small class="text-muted">Price: $ {{ product.price}}</small></p>
                   <!--Buttons to place item in basket or buy direct-->
                     <form method="POST"

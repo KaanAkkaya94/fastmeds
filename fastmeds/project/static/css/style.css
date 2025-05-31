@@ -564,3 +564,11 @@ ul li:hover {
 #logout:hover{
     background-color:#2980b9;
 }
+
+.in-stock-badge {
+    animation: flash 1s infinite alternate;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    box-shadow: 0 0 8px #28a745;
+}
+

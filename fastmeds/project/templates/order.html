@@ -66,29 +66,30 @@
             </div>
         </div>
         {% endfor %}
-        <!-- total price and controls -->
-        <div class="lead-5 text-end mb-3">
+ 
+       <div class="row mt-4 mb-1 justify-content-between">
+               <!-- total price and controls -->
+        <div class="lead-5 text-center mb-3">
             TOTAL: {{ "$ %.2f"|format(totalprice) }}
         </div>
-        <div class="row mt-4 mb-1 justify-content-between">
             {% if order.items|length > 0 %}
-            <div class="col-2 ">
-                <form method="POST" action="{{ url_for('main.clear_basket') }}">
-                    <input type="submit" value="Clear" class="btn btn-danger mb-3">
-                </form>
-            </div>
+                <div class="col-2">
+                    <form method="POST" action="{{ url_for('main.clear_basket') }}">
+                        <input type="submit" value="Clear" class="btn btn-danger mb-3">
+                    </form>
+                </div>
+                <div class="col-2 d-flex justify-content-end">
+                    <a href="{{ url_for('main.checkout') }}" class="btn btn-success mb-3">Checkout</a>
+                </div>
             {% endif %}
-            <div class="col-2 d-flex justify-content-end">
-                {% if order.items|length > 0 %}
-                <a href="{{ url_for('main.checkout') }}" class="btn btn-success mb-3">Checkout</a>
-                {% else %}
-                <a href="{{ url_for('main.index') }}">
-                    <button class="add_button brand_color_set mb-3">
-                        Continue Shopping
-                    </button></a>
-                {% endif %}
+        </div>
+        {% if order.items|length == 0 %}
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <a href="{{ url_for('main.index') }}" class="btn btn-primary mb-3">Continue to shop</a>
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

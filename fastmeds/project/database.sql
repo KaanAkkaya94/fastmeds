@@ -22,7 +22,7 @@ insert into categories (categoryName) values
 create table items(
 	itemID int auto_increment not null primary key,
     itemName varchar(50) not null,
-    itemDescription varchar(250) not null,
+    itemDescription varchar(550) not null,
     itemCategory int,
     itemPrice float,
     itemPicture varchar(255) not null default 'default.jpg',
@@ -31,32 +31,32 @@ create table items(
 
 insert into items (itemName, itemDescription, itemCategory, itemPrice) values
 # Analgesics
-('Paramol 500mg', 'Generic description for medicine.', 1, 4.99),
-('Irofen 200mg', 'Generic description for medicine.', 1, 4.99),
+('Paramol 500mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 1, 4.99),
+('Irofen 200mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 1, 4.99),
 # Antibacterials
-('Pemacillin 100mg', 'Generic description for medicine.', 2, 4.99),
-('Pernocyillin 50mg', 'Generic description for medicine.', 2, 4.99),
+('Pemacillin 100mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 2, 4.99),
+('Pernocyillin 50mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 2, 4.99),
 # Antibiotics
-('Axillin', 'Generic description for medicine.', 3, 4.99),
-('Azromycin 250mg', 'Generic description for medicine.', 3, 4.99),
+('Axillin', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 3, 4.99),
+('Azromycin 250mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 3, 4.99),
 # Cough Suppressants
-('Dexthorphan Syrup', 'Generic description for medicine.', 4, 4.99),
-('Benaryl Cough Liquid', 'Generic description for medicine.', 4, 4.99),
+('Dexthorphan Syrup', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 4, 4.99),
+('Benaryl Cough Liquid', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 4, 4.99),
 # Hormones
-('Traxine 100mcg', 'Generic description for medicine.', 5, 4.99),
-('Meraxine 200mcg', 'Generic description for medicine.', 5, 4.99),
+('Traxine 100mcg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 5, 4.99),
+('Meraxine 200mcg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 5, 4.99),
 # Laxatives
-('Ena Laxative Tablets', 'Generic description for medicine.', 6, 4.99),
-('Latulose Solution', 'Generic description for medicine.', 6, 4.99),
+('Ena Laxative Tablets', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 6, 4.99),
+('Latulose Solution', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 6, 4.99),
 # Sedatives
-('Dizepam 5mg', 'Generic description for medicine.', 7, 4.99),
-('Limozepam 1mg', 'Generic description for medicine.', 7, 4.99),
+('Dizepam 5mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 7, 4.99),
+('Limozepam 1mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 7, 4.99),
 # Sleeping Drugs
-('Metonin 3mg', 'Generic description for medicine.', 8, 4.99),
-('Zolone 7.5mg', 'Generic description for medicine.', 8, 4.99),
+('Metonin 3mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 8, 4.99),
+('Zolone 7.5mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 8, 4.99),
 # Vitamins
-('Vitamin C 1000mg', 'Generic description for medicine.', 9, 4.99),
-('Multivitamin Daily', 'Generic description for medicine.', 9, 4.99);
+('Vitamin C 1000mg', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 9, 4.99),
+('Multivitamin Daily', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 9, 4.99);
 
 
 
@@ -130,7 +130,7 @@ CREATE TABLE orders (
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     userFirstName varchar(20) not null,
     userLastName varchar(20) not null,
-    userEmail varchar(50) unique not null,
+    userEmail varchar(50) not null,
     userPhoneNumber varchar(20) not null,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE SET NULL
 );

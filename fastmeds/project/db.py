@@ -165,8 +165,8 @@ def search_items(query):
                c.categoryID, c.categoryName
         FROM items i
         JOIN categories c ON i.itemCategory = c.categoryID
-        WHERE i.itemName LIKE %s OR i.itemDescription LIKE %s
-    """, (query + '%', query + '%'))
+        WHERE i.itemName LIKE %s
+    """, (query + '%',))
     rows = cur.fetchall()
     cur.close()
 

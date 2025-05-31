@@ -337,3 +337,10 @@ def search():
         results = search_items(query)
 
     return render_template('search.html', query=query, results=results)
+
+
+#500 internal server error
+@bp.route('/main.500')
+def trigger_500():
+    # This will raise an exception and cause a 500 error
+    raise Exception("This is a test 500 error!")

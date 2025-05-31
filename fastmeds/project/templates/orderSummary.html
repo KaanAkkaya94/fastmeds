@@ -4,26 +4,40 @@
 
 {% block main %}
 <section class="mb-5 mt-5">
-    <div class="container text-center">
-
-        <h1>Order Summary</h1>
-        <ul>
-            {% for item in basket.items %}
-            <li>{{ item.product.name }} (x{{ item.quantity }}) - ${{ "%.2f"|format(item.product.price * item.quantity) }}</li>
-            {% endfor %}
-        </ul>
-        <!-- total price  -->
-        <div class="lead-5 text-center mb-3">
-            TOTAL: {{ "$ %.2f"|format(totalprice) }}
-        </div>
-        <div class="row mt-4 justify-content-center p-3">
-            <div class="col-md-6">
-                {{ wtf.render_form(form) }}
+    <div class="container d-flex justify-content-center">
+        <div class="card w-100" style="max-width: 700px;">
+            <div class="card-header text-center">
+                <h1>Order Summary</h1>
+            </div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    {% for item in basket.items %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ item.product.name }} (x{{ item.quantity }})
+                        <span>${{ "%.2f"|format(item.product.price * item.quantity) }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="d-flex justify-content-center mb-3">
+                    <div class="p-2 bg-warning text-dark rounded shadow" style="font-size:1rem; font-weight:bold; border: 2px solid #ffc107; min-width: 150px;">
+                        TOTAL: {{ "$ %.2f"|format(totalprice) }}
+                    </div>
+                </div>
+                <div class="mb-4 text-center">
+                    <h3 class="mb-3">Please confirm your details below.</h3>
+                    <p><strong>Name:</strong> {{ order_info.firstname }} {{ order_info.surname }}</p>
+                    <p><strong>Email:</strong> {{ order_info.email }}</p>
+                    <p><strong>Phone:</strong> {{ order_info.phone }}</p>
+                    <p><strong>Address:</strong> {{ order_info.address }}, {{ order_info.city }}, {{ order_info.state }} {{ order_info.postcode }}</p>
+                </div>
+                <h4 class="mb-3 text-center">Please choose payment and delivery options below to proceed.</h4>
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        {{ wtf.render_form(form) }}
+                    </div>
+                </div>
             </div>
         </div>
-        <form method="POST">
-            {{ form.hidden_tag() }}
-        </form>
     </div>
 </section>
 {% endblock %}

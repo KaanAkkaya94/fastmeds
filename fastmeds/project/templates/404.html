@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <h1>Error</h1>
-    <p>
-        Sorry, but the server has encounterd an error. Please try again in a few minutes. 
-    </p>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+    <div class="text-center">
+        <h1 class="display-1 text-danger fw-bold">404</h1>
+        <h2 class="mb-4 text-muted">Page Not Found</h2>
+        <p class="lead mb-4">
+            Oops! The page you are looking for does not exist or has been moved.<br>
+            Please check the URL or return to the homepage.
+        </p>
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary btn-lg mt-2">Go Home</a>
+    </div>
+</div>
 {% endblock %}

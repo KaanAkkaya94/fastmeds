@@ -19,6 +19,8 @@ def create_app():
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
     app.config['WTF_CSRF_ENABLED'] = False
+    # app.config['ENV'] = 'production'
+    # app.config['PROPAGATE_EXCEPTIONS'] = False
 
     mysql.init_app(app)
 
