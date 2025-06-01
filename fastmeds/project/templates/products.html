@@ -34,14 +34,25 @@
                                         <h2>$ {{ product.price }}</h2>
                                     </div>
                                     <div class="card-footer">
-                                        <form method="POST"
-                                              action="{{ url_for('main.adding_to_basket', product_id = product.id) }}">
-                                            <input
-                                                    type="submit"
-                                                    value="+ Add to Basket"
-                                                    class="btn add_button brand_color_set">
-                                        </form>
-                                    </div>
+                                    <form method="POST"
+                                        action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
+                                        class="d-flex flex-column align-items-center">
+                                        <input
+                                            type="number"
+                                            name="quantity"
+                                            value="1"
+                                            min="1"
+                                            class="mb-2"
+                                            style="width: 55px; font-size: 1rem;"
+                                            aria-label="Quantity"
+                                        >
+                                        <input
+                                            type="submit"
+                                            value="+ Add to Basket"
+                                            class="btn add_button brand_color_set w-100"
+                                        >
+                                    </form>
+                                </div>
 
                                 </div>
                             </div>

@@ -50,14 +50,20 @@ def order():
 # Adding items to the basket
 @bp.post('/basket/<int:product_id>/')
 def adding_to_basket(product_id):
-    add_to_basket(product_id)
+    try:
+        quantity = int(request.form.get('quantity', 1))
+        if quantity < 1:
+            quantity = 1
+    except ValueError:
+        quantity = 1
+    add_to_basket(product_id, quantity)
     return redirect(url_for('main.order'))
 
-# Adding items to the basket with a specified quantity
-@bp.post('/basket/<int:item_id>/<int:quantity>/')
-def adding_to_basket_with_quantity(item_id, quantity):
-    add_to_basket(item_id, quantity)
-    return redirect(url_for('main.order'))
+# # Adding items to the basket with a specified quantity
+# @bp.post('/basket/<int:item_id>/<int:quantity>/')
+# def adding_to_basket_with_quantity(item_id, quantity):
+#     add_to_basket(item_id, quantity)
+#     return redirect(url_for('main.order'))
 
 # Clear the basket
 @bp.post('/clearbasket/')

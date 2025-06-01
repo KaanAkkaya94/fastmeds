@@ -29,23 +29,40 @@
               </div>
               <!--Item details, including manufacturer, price, desription and id-->
               <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">{{ product.description}}</p>
-                  <div class="mb-2">
+                <div class="card-body h-100 d-flex flex-column justify-content-between">
+                  <div>
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description}}</p>
+                    <div class="mb-2">
                       <span class="badge bg-success in-stock-badge">IN STOCK</span>
+                    </div>
+                    <p class="card-text"><small class="text-muted">Price: $ {{ product.price}}</small></p>
                   </div>
-                  <p class="card-text"><small class="text-muted">Price: $ {{ product.price}}</small></p>
-                  <!--Buttons to place item in basket or buy direct-->
-                    <form method="POST"
-                          action="{{ url_for('main.adding_to_basket', product_id = product.id) }}">
-                        <input
-                                type="submit"
-                                value="+ Add to Basket"
-                                class="btn add_button brand_color_set">
-                    </form>
+                  <!-- Place form at the bottom right -->
+                  <div class="d-flex flex-column align-items-end mt-auto">
+                  <form method="POST"
+                        action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
+                        class="d-flex flex-column align-items-end"
+                        style="width: 220px;">
+                    <input
+                        type="number"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        class="form-control mb-2 w-100"
+                        style="height: 48px; font-size: 1.25rem;"
+                        aria-label="Quantity"
+                    >
+                    <input
+                        type="submit"
+                        value="+ Add to Basket"
+                        class="btn add_button brand_color_set w-100"
+                        style="height: 48px; font-size: 1.25rem; font-weight: bold;"
+                    >
+                  </form>
                 </div>
-              </div>
+                </div>
+              </div>  
             </div>
           </div>
 {% endblock %}
