@@ -59,9 +59,6 @@ insert into items (itemName, itemDescription, itemCategory, itemPrice) values
 ('Multivitamin Daily', 'This is a generic description for a fictional medicine product which can be purchased on our very user friendly web store Fastmeds. Money back guarantee if you are not satisfied with our products. If you have read this far, thank you very much for taking the time to read this gibberish and we thank you for your patience as you continue to check out the rest of our beautiful app. Have a great day.', 9, 4.99);
 
 
-
-
-
 select i.itemName as items, c.categoryName as categories, i.itemDescription AS description, i.itemPrice AS price
 from items i
 join categories c on i.itemCategory = c.categoryID
@@ -134,6 +131,11 @@ CREATE TABLE orders (
     userPhoneNumber varchar(20) not null,
     FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE SET NULL
 );
+
+insert into orders (orderID, userID, order_status, order_delivery_type, total_cost, order_date, userFirstName, userLastName, userEmail, userPhoneNumber) values
+( '1', '3', 'Confirmed', 'Normal Delivery', '99.9', '2025-01-05 11:22:58', 'Zulfiia', 'Suleimanova', 'sul@gmail.com', '0768788'),
+('2', '4', 'Confirmed', 'Express Delivery', '4.99', '2025-04-15 15:45:12', 'Steven', 'Steven', 'steven@gmail.com', '04123455'),
+('3', '5', 'Confirmed', 'Eco-Friendly Delivery', '4.99', '2025-05-31 21:36:09', 'Kaan', 'Kaan', 'kaan@gmail.com', '04123455');
 
 CREATE TABLE order_items (
     order_item_id INT AUTO_INCREMENT PRIMARY KEY,

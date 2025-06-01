@@ -4,8 +4,6 @@ from typing import List
 from enum import Enum
 from uuid import uuid4
 
-
-
 @dataclass
 class Category:
     id: str
