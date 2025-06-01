@@ -30,7 +30,7 @@
               <!--Item details, including manufacturer, price, desription and id-->
               <div class="col-md-8">
                 <div class="card-body h-100 d-flex flex-column justify-content-between">
-                  <div>
+                  <div style="margin-bottom: 20px">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description}}</p>
                     <div class="mb-2">
@@ -39,10 +39,10 @@
                     <p class="card-text"><small class="text-muted">Price: $ {{ product.price}}</small></p>
                   </div>
                   <!-- Place form at the bottom right -->
-                  <div class="d-flex flex-column align-items-end mt-auto">
+                  <div class="d-flex justify-content-between  mt-auto">
                     <form method="POST"
                           action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
-                          class="d-flex flex-column align-items-end"
+                          class="d-flex justify-content-between w-100"
                           style="width: 220px;">
                       <div class="input-group mb-1 me-3" style="width: 110px;">
                         <span class="input-group-text p-1" style="font-size: 1rem; border-radius: 0.375rem 0 0 0.375rem;">Qty</span>
