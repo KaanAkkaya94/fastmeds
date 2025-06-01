@@ -44,15 +44,15 @@
                           action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
                           class="d-flex flex-column align-items-end"
                           style="width: 220px;">
-                      <div class="input-group mb-2" style="width: 110px;">
+                      <div class="input-group mb-1 me-3" style="width: 110px;">
                         <span class="input-group-text p-1" style="font-size: 1rem; border-radius: 0.375rem 0 0 0.375rem;">Qty</span>
                         <input
                           type="number"
                           name="quantity"
                           value="1"
                           min="1"
-                          class="form-control text-center"
-                          style="width: 55px; font-size: 1.1rem; border-radius: 0 0.375rem 0.375rem 0;"
+
+                          style="width: 55px; font-size: 1.1rem; border-radius: 0 0.375rem 0.375rem 0; border: 1px solid #ced4da;"
                           aria-label="Quantity"
                         >
                       </div>
