@@ -75,21 +75,20 @@ create table deliveryOptions(
 );
 
 
-create table basket(
-		basketID int auto_increment not null primary key,
-        userID int,
-        paymentOptionID int not null,
-        deliveryOptionID int not null,
-        createdAt timestamp default current_timestamp,
-        basketPrice float not null,
-        foreign key (paymentOptionID) references paymentOptions (paymentID),
-        foreign key (deliveryOptionID) references deliveryOptions (deliveryID)
-);
+-- create table basket(
+-- 		basketID int auto_increment not null primary key,
+--         userID int,
+--         paymentOptionID int not null,
+--         deliveryOptionID int not null,
+--         createdAt timestamp default current_timestamp,
+--         basketPrice float not null,
+--         foreign key (paymentOptionID) references paymentOptions (paymentID),
+--         foreign key (deliveryOptionID) references deliveryOptions (deliveryID)
+-- );
 
 
 create table users(
 	userID int auto_increment not null primary key,
-    basketID int,
     userName varchar(50) unique not null,
     userPassword varchar(255) not null,
     userFirstName varchar(20) not null,
@@ -98,8 +97,7 @@ create table users(
     userPhoneNumber varchar(20) not null,
     userAdress varchar(50) not null,
     userState varchar(10) not null,
-    userPostcode int not null,
-    foreign key (basketID) references basket(basketID)
+    userPostcode int not null
 );
 
 insert into users (userName, userPassword, userFirstName, userLastName, userEmail, userPhoneNumber, userAdress, userState, userPostcode) values
