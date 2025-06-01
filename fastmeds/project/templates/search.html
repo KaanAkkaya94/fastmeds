@@ -17,16 +17,19 @@
             <div class="card-footer">
             <form method="POST"
                 action="{{ url_for('main.adding_to_basket', product_id=item.id) }}"
-                class="d-flex flex-column align-items-center">
-                <input
-                    type="number"
-                    name="quantity"
-                    value="1"
-                    min="1"
-                    style="width: 55px; font-size: 1rem; padding: 2px 4px; border-radius: 4px; border: 1px solid #ccc; text-align: center;"
-                    class="mb-2"
-                    aria-label="Quantity"
-                >
+                class="d-flex flex-column align-items-center w-100">
+                <div class="input-group mb-2" style="width: 70px;">
+                    <span class="input-group-text p-1" style="font-size: 0.9rem; border-radius: 0.375rem 0 0 0.375rem;">Qty</span>
+                    <input
+                        type="number"
+                        name="quantity"
+                        value="1"
+                        min="1"
+                        class="form-control text-center p-1"
+                        style="width: 35px; font-size: 1rem; border-radius: 0 0.375rem 0.375rem 0;"
+                        aria-label="Quantity"
+                    >
+                </div>
                 <input
                     type="submit"
                     value="+ Add to Basket"

@@ -40,27 +40,30 @@
                   </div>
                   <!-- Place form at the bottom right -->
                   <div class="d-flex flex-column align-items-end mt-auto">
-                  <form method="POST"
-                        action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
-                        class="d-flex flex-column align-items-end"
-                        style="width: 220px;">
-                    <input
-                        type="number"
-                        name="quantity"
-                        value="1"
-                        min="1"
-                        class="form-control mb-2 w-100"
-                        style="height: 48px; font-size: 1.25rem;"
-                        aria-label="Quantity"
-                    >
-                    <input
+                    <form method="POST"
+                          action="{{ url_for('main.adding_to_basket', product_id=product.id) }}"
+                          class="d-flex flex-column align-items-end"
+                          style="width: 220px;">
+                      <div class="input-group mb-2" style="width: 110px;">
+                        <span class="input-group-text p-1" style="font-size: 1rem; border-radius: 0.375rem 0 0 0.375rem;">Qty</span>
+                        <input
+                          type="number"
+                          name="quantity"
+                          value="1"
+                          min="1"
+                          class="form-control text-center"
+                          style="width: 55px; font-size: 1.1rem; border-radius: 0 0.375rem 0.375rem 0;"
+                          aria-label="Quantity"
+                        >
+                      </div>
+                      <input
                         type="submit"
                         value="+ Add to Basket"
                         class="btn add_button brand_color_set w-100"
                         style="height: 48px; font-size: 1.25rem; font-weight: bold;"
-                    >
-                  </form>
-                </div>
+                      >
+                    </form>
+                  </div>
                 </div>
               </div>  
             </div>
